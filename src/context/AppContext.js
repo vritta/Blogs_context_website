@@ -11,13 +11,14 @@ export default function AppContextProvider({children}){
     // const data = await axios.get(baseUrl);
     // console.log(data);
 
-    async function fetchBlogPost(page){
+    async function fetchBlogPosts(page){
         setLoading(true);
         let url = `${baseUrl}?page=${page}`;
+        console.log("priting the data "+ url);
         try{
             const result = await fetch(url);
             const data = await result.json();
-            console.log(data);
+            console.log("ko"+data);
             setPage(data.page);
             setPosts(data.posts);
             setTotalPages(data.totalPages);
@@ -33,14 +34,14 @@ export default function AppContextProvider({children}){
 
     function handlePageChange(page){
         setPage(page);
-        fetchBlogPost(page);
+        fetchBlogPosts(page);
     }
     const value={
         loading, setLoading,
         posts, setPosts,
         page, setPage,
         totalPages, setTotalPages,
-        fetchBlogPost,
+        fetchBlogPosts,
         handlePageChange
     };
     
