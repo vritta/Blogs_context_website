@@ -16,10 +16,9 @@ export default function App() {
   //     } Foo();},[]
   // );
   const {fetchBlogPosts} = useContext(AppContext);
-  useEffect(()=>{fetchBlogPosts();},[]
-  );
+  useEffect(()=>{fetchBlogPosts()},[]);
   return (
-    <div>
+    <div className="w-full h-full flex flex-col gap-y-1 justify-center items-center">
       <Header/>
       <Blogs/>
       <Pagination/>
