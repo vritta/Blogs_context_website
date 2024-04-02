@@ -11,9 +11,15 @@ export default function AppContextProvider({children}){
     // const data = await axios.get(baseUrl);
     // console.log(data);
 
-    async function fetchBlogPosts(page){
+    async function fetchBlogPosts(page, tag=null, category=null){
         setLoading(true);
         let url = `${baseUrl}?page=${page}`;
+        if (tag){
+            url+= `&tag=${tag}`
+        }
+        if (category){
+            url+= `&category=${category}`
+        }
         // console.log("priting the data "+ url);
         try{
             const result = await fetch(url);
