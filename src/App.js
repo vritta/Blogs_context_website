@@ -4,7 +4,7 @@ import Pagination from './components/Pagination.js';
 import Blogs from './components/Blogs.js';
 import { AppContext } from "./context/AppContext.js";
 import { useContext, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation, useSearchParams } from "react-router-dom";
 
 export default function App() {
   
@@ -17,7 +17,23 @@ export default function App() {
   //     } Foo();},[]
   // );
   const {fetchBlogPosts} = useContext(AppContext);
-  useEffect(()=>{fetchBlogPosts()},[]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
+  useEffect(()=>{
+    // fetchBlogPosts()},[]
+    const page = searchParams.get("page") ?? 1;
+    if(location.pathname.includes("tags")){
+      const tag = location.pathname.split("/").at(-1).replaceAll("-"," ");
+      fetchBlogPosts(Number(page), tag);
+    }
+    else if(location.pathname.includes("category")){
+      const tag = location.pathname.split("/").at(-1).replaceAll("-"," ");
+      fetchBlogPosts(Number(page), null, category);
+    }
+    else{
+      fetchBlogPosts(Number(page));
+    }
+  },[]);
   return (
     <Routes>
       <Route path="/" element={<Header/>}/>
@@ -29,7 +45,7 @@ export default function App() {
     //   <Header/>
     //   <Blogs/>
     //   <Pagination/>
-    //   {/* {Foo()} */}
+      // {/* {Foo()} */}
     // </div>
   );
 
