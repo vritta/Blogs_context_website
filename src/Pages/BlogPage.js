@@ -1,7 +1,10 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {useNavigation, useLocation} from 'react-router-dom'
 import { AppContext } from '../context/AppContext';
 import { baseUrl } from '../baseUrl';
+import Header from '../components/Header';
+import Spinner from '../components/Spinner';
+import Card from '../components/Card';
 
 const BlogPage = () => {
   const [blog, setBlog] = useState(null);
@@ -17,14 +20,46 @@ const BlogPage = () => {
       const res = await fetch(url);
       const data = await res.json();
       setBlog(data.blog);
+      setRelatedBlogs(data.relatedBlogs);
     }
     catch(err){
-      console.log(err);
+      console.log(err.message);
+      setBlog(null);
+      setRelatedBlogs([]);
     }
+    setLoading(false);
   }
+
+  useEffect(()=>{ 
+    if(blogId){
+      fetchRelatedBlogs() 
+    }
+    }, [location.pathname]);
   return (
     <div>
-      
+      <Header/>
+      <div>
+        <button onClick={()=>navigation(-1)}>
+          Back
+        </button>
+      </div>
+      {
+        loading ? <Spinner/>: 
+        blog ? (<div>
+          <Card post={blog}/>
+          <h2>Related Blogs</h2>
+          {
+            relatedBlogs.map((post)=>(
+            <div>
+              <Card post={post} key={post.id}/>
+            </div>)
+            )
+          }
+        </div>):
+        (<div>
+          <p>No Blog found</p>
+        </div>)
+      }
     </div>
   )
 }
