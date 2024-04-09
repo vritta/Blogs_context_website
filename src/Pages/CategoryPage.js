@@ -1,11 +1,11 @@
 import React from 'react'
-import {useNavigation, useLocation} from 'react-router-dom'
+import {useNavigate, useLocation} from 'react-router-dom'
 import Header from '../components/Header'
 import Blogs from '../components/Blogs';
 import Pagination from '../components/Pagination';
 
 const CategoryPage = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigate();
   const location = useLocation();
   const Category = location.pathname.split("/").at(-1);
   return (
