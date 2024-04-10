@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import {useNavigate} from 'react-router-dom'
 import { baseUrl } from '../baseUrl';
 //step 1
 export const AppContext = createContext();
@@ -8,6 +9,7 @@ export default function AppContextProvider({children}){
     const [posts, setPosts] = useState([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(null);
+    const navigate = useNavigate();
     // const data = await axios.get(baseUrl);
     // console.log(data);
 
@@ -39,8 +41,9 @@ export default function AppContextProvider({children}){
     }
 
     function handlePageChange(page){
+        navigate({search:`?page=${page}`});
         setPage(page);
-        fetchBlogPosts(page);
+        // fetchBlogPosts(page);
     }
     const value={
         loading, setLoading,
