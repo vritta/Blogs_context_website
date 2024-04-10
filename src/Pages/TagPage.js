@@ -10,12 +10,12 @@ const TagPage = () => {
   const location = useLocation();
   const tag = location.pathname.split("/").at(-1);
   return (
-    <div>
+    <div className="w-full h-full flex flex-col gap-y-1 justify-center items-center">
       <Header/>
-      <div>
-        <button onClick={()=>navigation(-1)}>Back</button>
-        <h2>
-          Blogs Tagged <span>#{tag}</span>
+      <div className='w-11/12 max-w-[670px] py-8 flex flex-col gap-y-7 mt-[66px] mb-[-100px]'>
+        <button onClick={()=>navigation(-1)} className='rounded-md border-2 px-4 py-1 bg-slate-300'>Back</button>
+        <h2 className='font-bold'>
+          Blogs Tagged <span className='text-blue-600 underline font-bold mt-[5px]'>#{tag}</span>
         </h2>
       </div>
       <Blogs/>

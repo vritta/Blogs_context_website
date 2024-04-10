@@ -36,19 +36,20 @@ const BlogPage = () => {
       fetchRelatedBlogs();
     }
   }, [location.pathname]);
+
   return (
-    <div>
+    <div className="w-full h-full flex flex-col gap-y-1 justify-center items-center">
       <Header/>
-      <div>
-        <button onClick={()=>navigation(-1)}>
+      <div className='w-11/12 max-w-[670px] py-8 flex flex-col gap-y-7 mt-[66px] mb-[-100px]'>
+        <button onClick={()=>navigation(-1)} className='rounded-md border-2 px-4 py-1 bg-slate-300'>
           Back
         </button>
       </div>
       {
         loading ? <Spinner/>: 
-        blog ? (<div>
+        blog ? (<div className='w-11/12 max-w-[670px] py-8 flex flex-col gap-y-7 mt-[66px] mb-[70px]'>
           <Card post={blog}/>
-          <h2>Related Blogs</h2>
+          <h2 className='font-bold'>Related Blogs</h2>
           {
             relatedBlogs.map((post)=>(
             <div key={post.id}>
