@@ -51,8 +51,8 @@ const BlogPage = () => {
           <h2>Related Blogs</h2>
           {
             relatedBlogs.map((post)=>(
-            <div>
-              <Card post={post} key={post.id}/>
+            <div key={post.id}>
+              <Card post={post}/>
             </div>)
             )
           }

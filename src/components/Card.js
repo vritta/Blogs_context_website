@@ -19,8 +19,8 @@ const Card = ({post}) => {
       <p className='text-md mt-[14px]'>{post.content}</p>
       <div className='flex gap-x-3'>
         {post.tags.map((tag, index)=>(
-          <NavLink to={`/tags/${tag.replaceAll(" ", "-")}`}>
-            <span key={index} className='text-blue-600 underline font-bold text-xs mt-[5px]'> 
+          <NavLink key={index} to={`/tags/${tag.replaceAll(" ", "-")}`}>
+            <span className='text-blue-600 underline font-bold text-xs mt-[5px]'> 
               {`#${tag}`}
             </span>
           </NavLink>))
